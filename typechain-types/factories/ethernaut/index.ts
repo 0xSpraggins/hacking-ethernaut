@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { CoinFlip__factory } from "./CoinFlip__factory";
+export { Telephone__factory } from "./Telephone__factory";

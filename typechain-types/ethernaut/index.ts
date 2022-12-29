@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { CoinFlip } from "./CoinFlip";
+export type { Telephone } from "./Telephone";

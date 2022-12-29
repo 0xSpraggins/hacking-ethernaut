@@ -17,9 +17,17 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CoinFlip__factory>;
     getContractFactory(
+      name: "Telephone",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Telephone__factory>;
+    getContractFactory(
       name: "HackCoinFlip",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.HackCoinFlip__factory>;
+    getContractFactory(
+      name: "HackTelephone",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.HackTelephone__factory>;
 
     getContractAt(
       name: "CoinFlip",
@@ -27,10 +35,20 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.CoinFlip>;
     getContractAt(
+      name: "Telephone",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Telephone>;
+    getContractAt(
       name: "HackCoinFlip",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.HackCoinFlip>;
+    getContractAt(
+      name: "HackTelephone",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.HackTelephone>;
 
     // default types
     getContractFactory(
