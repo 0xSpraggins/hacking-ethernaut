@@ -16,7 +16,7 @@ contract CoinFlip {
         uint256 blockValue = uint256(blockhash(block.number - 1));
 
         if (lastHash == blockValue) {
-            revert("Blockhash Error");
+            revert();
         }
 
         lastHash = blockValue;

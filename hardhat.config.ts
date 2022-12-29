@@ -4,8 +4,11 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-const GOERLI_ALCHEMY_API_KEY: string | undefined = process.env.GOERLI_ALCHEMY_API_KEY;
-const GOERLI_PRIVATE_KEY: string = process.env.GOERLI_PRIVATE_KEY ? process.env.GOERLI_PRIVATE_KEY : '';
+let { GOERLI_PRIVATE_KEY, GOERLI_ALCHEMY_API_KEY } = process.env;
+
+if (GOERLI_PRIVATE_KEY == undefined) {
+  GOERLI_PRIVATE_KEY = '';
+}
 
 const config: HardhatUserConfig = {
   solidity: "0.8.17",
@@ -14,7 +17,8 @@ const config: HardhatUserConfig = {
       chainId: 1337
     },
     goerli: {
-      url: `https://eth-goerli.g.alchemy.com/v2/${GOERLI_ALCHEMY_API_KEY}`,
+      chainId: 5,
+      url: `https://goerli.infura.io/v3/4132b7a34e7c42c3953062934b7d44f7`,
       accounts: [GOERLI_PRIVATE_KEY]
     }
   }
