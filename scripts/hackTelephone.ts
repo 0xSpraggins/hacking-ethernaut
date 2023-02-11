@@ -27,7 +27,7 @@ async function main() {
         console.log(`Telephone Contract Address: ${contract.address}`);
         console.log(`Exploit Contract Address: ${exploitTelephoneContract.address}`);
         console.log(`Desired Contract Owner Address: ${desiredOwnerAddress}`);
-        
+         
         console.log("Attacking contract...");
         await exploitTelephoneContract.attack();
         // Verify that the contract owner has been changed to the desired owner
@@ -36,7 +36,6 @@ async function main() {
         } else {
             console.log("----------Attack Failed-----------");
             console.log(`Contract owner: ${await contract.owner()}`);
-
         } 
     }
   }
