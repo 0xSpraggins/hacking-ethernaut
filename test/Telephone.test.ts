@@ -3,7 +3,6 @@ import { Contract, providers } from "Ethers";
 import { describe, it } from "mocha";
 import { ethers } from "hardhat";
 import * as dotenv from 'dotenv';
-import { time } from "@nomicfoundation/hardhat-network-helpers";
 
 dotenv.config();
 
@@ -13,7 +12,7 @@ describe("Telephone", async () => {
 
     beforeEach('Setup', async () => {
         const contractFactory = await ethers.getContractFactory("Telephone");
-        telephoneContract = await contractFactory.deploy();const signer = await ethers.provider.getSigner();
+        telephoneContract = await contractFactory.deploy(); const signer = await ethers.provider.getSigner();
         signerAddress = await signer.getAddress();
         console.log(`Signer Address: ${signerAddress}`);
     });
@@ -24,7 +23,7 @@ describe("Telephone", async () => {
         exploitTelephoneContract = await exploitFactory.deploy(telephoneContract.address, signerAddress);
 
         await exploitTelephoneContract.attack();
-        
+
         expect(await telephoneContract.owner()).to.equal(signerAddress);
     });
 

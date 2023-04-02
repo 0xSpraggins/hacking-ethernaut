@@ -53,10 +53,24 @@ Vulnerability: Making sure tx.origin is not the sender is the only guard against
 
 Problem: You are given 20 tokens to start. Try to gain access to as many tokens as possible
 
-Vulnerability: Due to the token contract having no protection for integer overflow or underflow, if a user transfers a value 1 greater than their balance they will be able to increase their token balance to ` 2^256-1`. The \_to parameter must be any address not equal to msg.sender.
+Vulnerability: Due to the token contract having no protection for integer overflow or underflow, if a user transfers a value 1 greater than their balance they will be able to increase their token balance to ` 2^256-1`. The _to parameter must be any address not equal to msg.sender.
 
 ```
 // Typescript example
 const amount: number = await contract.getBalance(player) + 1;
 await contract.transfer('0x0000000000000000000000000000000000000000', amount);
+```
+
+### Level 6: Delegation
+
+Problem: Gain ownership of the `Delegation` contract
+
+Vulnerability: A `delegatecall` in solidity is a function that allows users to call a contract function in the context of the contract making the call. The `Delegation` contract has a `fallback` function that `delegatecalls` the `Delegate` contract with `msg.data` passed. Because of the open ended data being sent to the `Delegate` contract when the `fallback` function is triggered the hacker can call any function that exists within the `Delegate` contract. Within the `Delegate` contract the `pwn` function sets the owner to msg.sender. Since we are trying to take ownership of the `Delegation` contract we can all this `pwn` function within the context of the `Delegation` contract using the bug in the `fallback` function of allowing any data to be passsed. In order to call the `pwn` function we need to get its `Method ID`. To do this use the `keccak256` hash function to encode the input `"pwn()"` and then use the 4 for bytes of the output.
+
+An example of how we do this with a simple call is below.
+
+```
+// Typescript example
+// Method ID = 0xdd365b8b
+await contract.sendTransaction({data: "0xdd365b8b"});
 ```
