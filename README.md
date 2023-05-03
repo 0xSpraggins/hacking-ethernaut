@@ -37,6 +37,33 @@ Ethernaut is a game created by Open Zeppelin to practice hacking solidity smart 
 
 ## Levels
 
+### Level 1: Hello Ethernaut
+
+This level teaches you the basics of playing the game, mainly how to interact with the game via the browser's console.
+
+Important info: 
+    - ```player``` returns the users address being used for a given level
+    - ```await getBalance(address)``` returns the resolved promise of the balance of a given address
+    - ```ethernaut``` returns a TruffleContract object that can be used to interact with the levels contract
+    - ```contract``` allows a user to view the abi of the contract
+
+Problem: View the contracts info and find the necessary info to complete the level.
+
+Solution: When viewing the levels info ethernaut returns `You will find what you need in info1()`. When calling `info1` the attacker
+    is told to call `info2` and pass "hello". The return value tells to user to go to the infoNum property to find the next method to call.
+    When calling `infoNum` we get an array with the number 42 as only value in the array. There is an available method that matches this,
+    `info42`. Once called it returns `theMethodName is the name of the next method`. This leads us to another method to call, `method7123949`.
+    This tells us to solve the level we must submit the password to the `authenticate` function. When viewing the contract we see there
+    is a public variable called `password`. The return value of this is `ethernaut0`. Passing this into `authenticate` will
+    solve the level.
+
+### Level 2: 
+
+Problem:
+
+Vulnerability:
+
+
 ### Level 3: Coin Flip \*Current Issue in Script
 
 Problem: The base smart contract tracks the number of consecutive wins a user has when guessing a coin flip. The goal in this level is to predict the outcome 10 times in a row.
