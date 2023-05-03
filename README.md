@@ -22,8 +22,8 @@ Ethernaut is a game created by Open Zeppelin to practice hacking solidity smart 
 1. Create a .env file and add your RPC API Key, account private key, and the instance of the contract you are trying to hack. Example:
 
    ```
-   GOERLI_ALCHEMY_API_URL=<Your API Key>
-   GOERLI_PRIVATE_KEY=<Your Private Key>
+   SEPOLIA_ALCHEMY_API_URL=<Your API Key>
+   ACCOUNT_PRIVATE_KEY=<Your Private Key>
    CONTRACT_INSTANCE_ADDRESS=<Contract Address>
    ```
 
