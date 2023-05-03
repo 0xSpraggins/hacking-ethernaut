@@ -94,7 +94,7 @@ Vulnerability overview: The vulnerability is found within the randomness of the 
 
 Problem: Gain ownership of the contract.
 
-Vulnerability: Making sure tx.origin is not the sender is the only guard against changing ownership. This can easily be bypassed by creating a smart contract that calls the change owner function therfore making tx.orgin != msg.sender true and changing contract ownership.
+Vulnerability: Making sure tx.origin is not the sender is the only guard against changing ownership. This can easily be bypassed by creating a smart contract that calls the change owner function therefore making tx.orgin != msg.sender true and changing contract ownership.
 
 ### Level 5: Token
 
