@@ -1,7 +1,15 @@
+# Environment Variables/Config
 .env
+
+# ID & Misc Settings
 .idea/
 .DS_STORE
-./artifacts
-./cache
-./node_modules
+
+# Build data & Dependencies
+artifacts/
+cache/
+node_modules/
 .yarn-error.log/
+.yarn
+
+typechain-types/
