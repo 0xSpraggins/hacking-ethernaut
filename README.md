@@ -37,7 +37,7 @@ Ethernaut is a game created by Open Zeppelin to practice hacking solidity smart 
 
 ## Levels
 
-### Level 1: Hello Ethernaut
+### Level 0: Hello Ethernaut
 
 This level teaches you the basics of playing the game, mainly how to interact with the game via the browser's console.
 
@@ -57,12 +57,32 @@ Solution: When viewing the levels info ethernaut returns `You will find what you
     is a public variable called `password`. The return value of this is `ethernaut0`. Passing this into `authenticate` will
     solve the level.
 
-### Level 2: 
+### Level 1: 
 
-Problem:
+Problem: Gain ownership of the contract and reduce its balance to 0.
 
-Vulnerability:
+Vulnerability: There is a receive fallback function which sets the owner to msg.sender if the sender send a value greater than
+    1 wei to the contract and has previously contributed to the contract. This exploit can be completed 100% within the 
+    console. First the user must contribute some ether < .001 to the contract then they must send ether to the contracts address
+    to trigger the fallback function. Once this occurs the attacker can call the `withdraw` function to steal the funds.
 
+```js
+// Contribute to the contract
+await contract.contribute({'value': toWei('0.00000000001')});
+
+// Send ether to the contract to gain ownership
+await contract.sendTransaction({value: 1});
+
+// Withdraw the contracts balance
+await contract.withdraw();
+```
+
+### Level 2:
+
+Problem: Gain ownership of the contract
+
+Vulnerability: The contracts constructor has a typo in it and is `Fal1out` instead of `Fallout` this allows any user to call it instead of
+    it being called upon contract deployment. In order to gain ownership all a user has to do is call `await contract.Fal1out();`.
 
 ### Level 3: Coin Flip \*Current Issue in Script
 
@@ -82,8 +102,7 @@ Problem: You are given 20 tokens to start. Try to gain access to as many tokens 
 
 Vulnerability: Due to the token contract having no protection for integer overflow or underflow, if a user transfers a value 1 greater than their balance they will be able to increase their token balance to ` 2^256-1`. The _to parameter must be any address not equal to msg.sender.
 
-```
-// Typescript example
+```js
 const amount: number = await contract.getBalance(player) + 1;
 await contract.transfer('0x0000000000000000000000000000000000000000', amount);
 ```
@@ -96,8 +115,7 @@ Vulnerability: A `delegatecall` in solidity is a function that allows users to c
 
 An example of how we do this with a simple call is below.
 
-```
-// Typescript example
+```js
 // Method ID = 0xdd365b8b
 await contract.sendTransaction({data: "0xdd365b8b"});
 ```
