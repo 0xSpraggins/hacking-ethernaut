@@ -24,27 +24,27 @@ import type {
 
 export interface HackTelephoneInterface extends utils.Interface {
   functions: {
-    "_desiredOwner()": FunctionFragment;
     "attack()": FunctionFragment;
+    "desiredOwner()": FunctionFragment;
     "owner()": FunctionFragment;
   };
 
   getFunction(
-    nameOrSignatureOrTopic: "_desiredOwner" | "attack" | "owner"
+    nameOrSignatureOrTopic: "attack" | "desiredOwner" | "owner"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "attack", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "_desiredOwner",
+    functionFragment: "desiredOwner",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "attack", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
 
+  decodeFunctionResult(functionFragment: "attack", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "_desiredOwner",
+    functionFragment: "desiredOwner",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "attack", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
 
   events: {};
@@ -77,27 +77,27 @@ export interface HackTelephone extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    _desiredOwner(overrides?: CallOverrides): Promise<[string]>;
-
     attack(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    desiredOwner(overrides?: CallOverrides): Promise<[string]>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
   };
-
-  _desiredOwner(overrides?: CallOverrides): Promise<string>;
 
   attack(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  desiredOwner(overrides?: CallOverrides): Promise<string>;
+
   owner(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    _desiredOwner(overrides?: CallOverrides): Promise<string>;
-
     attack(overrides?: CallOverrides): Promise<void>;
+
+    desiredOwner(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
   };
@@ -105,21 +105,21 @@ export interface HackTelephone extends BaseContract {
   filters: {};
 
   estimateGas: {
-    _desiredOwner(overrides?: CallOverrides): Promise<BigNumber>;
-
     attack(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    desiredOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    _desiredOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     attack(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    desiredOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };

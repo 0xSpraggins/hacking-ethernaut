@@ -17,6 +17,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CoinFlip__factory>;
     getContractFactory(
+      name: "King",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.King__factory>;
+    getContractFactory(
       name: "Telephone",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Telephone__factory>;
@@ -24,6 +28,14 @@ declare module "hardhat/types/runtime" {
       name: "HackCoinFlip",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.HackCoinFlip__factory>;
+    getContractFactory(
+      name: "HackForce",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.HackForce__factory>;
+    getContractFactory(
+      name: "HackKing",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.HackKing__factory>;
     getContractFactory(
       name: "HackTelephone",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -35,6 +47,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.CoinFlip>;
     getContractAt(
+      name: "King",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.King>;
+    getContractAt(
       name: "Telephone",
       address: string,
       signer?: ethers.Signer
@@ -44,6 +61,16 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.HackCoinFlip>;
+    getContractAt(
+      name: "HackForce",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.HackForce>;
+    getContractAt(
+      name: "HackKing",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.HackKing>;
     getContractAt(
       name: "HackTelephone",
       address: string,

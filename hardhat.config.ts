@@ -19,7 +19,8 @@ const config: HardhatUserConfig = {
     sepolia: {
       chainId: 11155111,
       url: `https://sepolia.infura.io/v3/${SEPOLIA_API_KEY}`,
-      accounts: [ACCOUNT_PRIVATE_KEY]
+      accounts: [ACCOUNT_PRIVATE_KEY],
+      gasPrice: 3000000000
     }
   }
 };

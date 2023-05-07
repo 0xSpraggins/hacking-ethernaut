@@ -2,4 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { HackCoinFlip } from "./HackCoinFlip";
+export type { HackForce } from "./HackForce";
+export type { HackKing } from "./HackKing";
 export type { HackTelephone } from "./HackTelephone";
