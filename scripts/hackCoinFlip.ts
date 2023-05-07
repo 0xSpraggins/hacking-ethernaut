@@ -1,7 +1,6 @@
 import { ethers, network } from "hardhat";
 import * as dotenv from 'dotenv';
-import { Contract, providers, Signer } from "ethers";
-import { setTimeout } from "timers/promises";
+import { Contract } from "ethers";
 
 dotenv.config();
 
@@ -9,7 +8,7 @@ dotenv.config();
 const DESIRED_WINS = 10;
 
 async function main() {
-    // We only verify on a testnet!
+    // We only verify on Sepolia!
     if (network.config.chainId != 11155111) {
       console.log("Ethernaut contracts in this repo can only be run on the Sepolia Network");
       

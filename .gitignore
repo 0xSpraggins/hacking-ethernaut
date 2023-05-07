@@ -9,7 +9,7 @@
 artifacts/
 cache/
 node_modules/
-.yarn-error.log/
+yarn-error.log/
 .yarn
 
 typechain-types/

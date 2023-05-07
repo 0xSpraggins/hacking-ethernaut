@@ -119,3 +119,13 @@ An example of how we do this with a simple call is below.
 // Method ID = 0xdd365b8b
 await contract.sendTransaction({data: "0xdd365b8b"});
 ```
+
+### Level 7: Force
+
+Problem: Make the contracts balance greater than 0.
+
+Vulnerability: The contract has no code in it, so there is no fallback methods to accept Ether. Because of this both `send` and `transfer` will both revert. In order to be able to send ETH to the contract you can create a exploit 
+    contract, donate ETH to said contract, and utilize the self-destruct feature to send all the Ether from the exploit contract to the `Force` contract. 
+    
+
+### Level 8: Vault

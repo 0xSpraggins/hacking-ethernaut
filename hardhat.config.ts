@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-let {ACCOUNT_PRIVATE_KEY, SEPOLIA_API_KEY } = process.env;
+let { ACCOUNT_PRIVATE_KEY, SEPOLIA_API_KEY } = process.env;
 
 if (ACCOUNT_PRIVATE_KEY == undefined) {
   ACCOUNT_PRIVATE_KEY = '';
@@ -19,7 +19,8 @@ const config: HardhatUserConfig = {
     sepolia: {
       chainId: 11155111,
       url: `https://sepolia.infura.io/v3/${SEPOLIA_API_KEY}`,
-      accounts: [ACCOUNT_PRIVATE_KEY]
+      accounts: [ACCOUNT_PRIVATE_KEY],
+      gasPrice: 1000000000
     }
   }
 };

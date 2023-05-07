@@ -5,10 +5,10 @@ import { Contract, providers, Signer } from "ethers";
 dotenv.config();
 
 async function main() {
-    // Verify were on goerli
-    if (network.config.chainId != 5) {
-      console.log("Ethernaut contracts can only be attacked on the Goerli Network.");
-      
+    // We only verify on Sepolia!
+    if (network.config.chainId != 11155111) {
+        console.log("Ethernaut contracts in this repo can only be run on the Sepolia Network");
+
     } else {
         // Initialize variables needed to access the telephone contract
         const contractAddress: string = process.env.CONTRACT_INSTANCE_ADDRESS ? process.env.CONTRACT_INSTANCE_ADDRESS : ethers.constants.AddressZero;
