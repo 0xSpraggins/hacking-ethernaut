@@ -140,3 +140,9 @@ Vulnerability: The only protection against users trying to `unlock` the vault is
 const password = await web3.eth.getStorageAt(contract.address, 1);
 await contract.unlock(password);
 ```
+
+### Level 9: King
+
+Problem: In a game where whoever sends the most Eth to the contract becomes the king and the overthrown king gets paid a prize. Break the game so that when the level reclaims kingship you can avoid being overthrown.
+
+Vulnerability: Because this game involves sending Eth to the previous kings address using `transfer` it assumes the king will either be an `EOA` or a contract containing a `receive` or `fallback` function. This flawed logic allows us to break the game by creating a smart contract with no `receive` or `fallback` function. Once this contract is king it will never be dethrowned due to the `King` contracts `receive` function reverting whenever Eth is transfered to the expoit contract.
