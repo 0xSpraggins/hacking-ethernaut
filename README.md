@@ -129,3 +129,14 @@ Vulnerability: The contract has no code in it, so there is no fallback methods t
     
 
 ### Level 8: Vault
+
+Problem: Unlock the vault
+
+Vulnerability: The only protection against users trying to `unlock` the vault is checking if the password matches the `bytes32 private password` variable. Even though `password` is private everything on the blockchain is public and can be seen. Using `getStorageAt` from `web3.eth` private variables can be accessed. Below is an example of how to unlock the vault.
+
+```js
+// Get the password.
+// Position 1 in storage slot due to being the second slot
+const password = await web3.eth.getStorageAt(contract.address, 1);
+await contract.unlock(password);
+```
