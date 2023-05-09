@@ -9,6 +9,8 @@ Ethernaut is a game created by Open Zeppelin to practice hacking solidity smart 
   - Solutions: Smart contracts created by me to exploit the vulernabilities within corresponding Ethernaut contracts.
 - scripts: Scripts that when ran attack the Ethernaut level.
 - test: Test cases to test if exploits works.
+- lib: Github submodules used for Foundry
+- foundry.toml: Config file which set up the Foundry developmeent environment as well as dependency remappings.
 
 ### Languages and Frameworks used
 
@@ -16,6 +18,7 @@ Ethernaut is a game created by Open Zeppelin to practice hacking solidity smart 
 - Typescript
 - Hardhat
 - EthersJS
+- Foundry
 
 ### How to
 
@@ -146,3 +149,10 @@ await contract.unlock(password);
 Problem: In a game where whoever sends the most Eth to the contract becomes the king and the overthrown king gets paid a prize. Break the game so that when the level reclaims kingship you can avoid being overthrown.
 
 Vulnerability: Because this game involves sending Eth to the previous kings address using `transfer` it assumes the king will either be an `EOA` or a contract containing a `receive` or `fallback` function. This flawed logic allows us to break the game by creating a smart contract with no `receive` or `fallback` function. Once this contract is king it will never be dethrowned due to the `King` contracts `receive` function reverting whenever Eth is transfered to the expoit contract.
+
+
+### Level 10: Reentrance
+
+Problem: Steal all the funds from the contract
+
+Vulnerability: In the `withdraw` function the balances are updated after Eth is sent to `msg.sender` because of this an attacker can utilize a fallback function to reenter the withdraw contracts before balances are updated thus drain the entire contract.
