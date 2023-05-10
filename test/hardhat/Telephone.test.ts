@@ -20,9 +20,9 @@ describe("Telephone", async () => {
     it("Change ownership of telephone contract", async () => {
         // Deploy the hack coin flip contract with a guess goal of 10
         const exploitFactory = await ethers.getContractFactory("HackTelephone");
-        exploitTelephoneContract = await exploitFactory.deploy(telephoneContract.address, signerAddress);
+        exploitTelephoneContract = await exploitFactory.deploy(telephoneContract.address);
 
-        await exploitTelephoneContract.attack();
+        await exploitTelephoneContract.attack(signerAddress);
 
         expect(await telephoneContract.owner()).to.equal(signerAddress);
     });

