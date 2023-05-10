@@ -13,3 +13,6 @@ yarn-error.log/
 .yarn
 
 typechain-types/
+
+# Script generated files
+broadcast/

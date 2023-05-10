@@ -25,7 +25,7 @@ Ethernaut is a game created by Open Zeppelin to practice hacking solidity smart 
 1. Create a .env file and add your RPC API Key, account private key, and the instance of the contract you are trying to hack. Example:
 
    ```
-   SEPOLIA_ALCHEMY_API_URL=<Your API Key>
+   SEPOLIA_RPC_URL=<Your API Key>
    ACCOUNT_PRIVATE_KEY=<Your Private Key>
    CONTRACT_INSTANCE_ADDRESS=<Contract Address>
    ```
@@ -34,8 +34,12 @@ Ethernaut is a game created by Open Zeppelin to practice hacking solidity smart 
 3. Test Exploits: `yarn hardhat test`
 4. Attack a level:
 
-   ```
+   ```bash
+   // Scripts using hardhat
    yarn hardhat run <path to script> --network goerli
+
+   // Scripts using foundry
+   forge script <path to script>:<script contract name> --rpc-url $<name of url .env variable> --broadcast -vvvv
    ```
 
 ## Levels
@@ -151,7 +155,7 @@ Problem: In a game where whoever sends the most Eth to the contract becomes the 
 Vulnerability: Because this game involves sending Eth to the previous kings address using `transfer` it assumes the king will either be an `EOA` or a contract containing a `receive` or `fallback` function. This flawed logic allows us to break the game by creating a smart contract with no `receive` or `fallback` function. Once this contract is king it will never be dethrowned due to the `King` contracts `receive` function reverting whenever Eth is transfered to the expoit contract.
 
 
-### Level 10: Reentrance
+### Level 10: Reentrancy
 
 Problem: Steal all the funds from the contract
 

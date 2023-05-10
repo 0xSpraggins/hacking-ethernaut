@@ -31,20 +31,8 @@ contract ReentranceTest is Test {
         vm.stopPrank();
     }
 
-    // function fundContractWithRando() public {
-    //     vm.startPrank(_rando);
-    //     (bool success,) = address(_reentrance).call{value: 10000000000}(
-    //         abi.encodeWithSignature("donate(address)", _rando)
-    //     );
-    //     require(success, "ReentranceTest: failed to donate to reentrance");
-    //     vm.stopPrank();
-    // }
-
     function test_attack() public {
         vm.startPrank(_hacker);
-        // (bool success, ) = address(_hackReentrance).call{value: 2000000000}(
-        //     abi.encodeWithSignature("contribute")
-        // );
 
         (bool success,) = address(_hackReentrance).call{value: 200000000}(
             abi.encodeWithSignature("contribute()")

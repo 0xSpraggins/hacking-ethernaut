@@ -10,4 +10,7 @@ remappings = [
     'openzeppelin-v6/=lib/openzeppelin-contracts/contracts/'
 ]
 
+[rpc_endpoints]
+sepolia = "${SEPOLIA_RPC_URL}"
+
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
