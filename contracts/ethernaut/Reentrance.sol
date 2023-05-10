@@ -7,7 +7,6 @@ contract Reentrance {
   
   using SafeMath for uint256;
   mapping(address => uint) public balances;
-  event FunctionEntered(uint256 times);
 
   function donate(address _to) public payable {
     balances[_to] = balances[_to].add(msg.value);
@@ -18,7 +17,6 @@ contract Reentrance {
   }
 
   function withdraw(uint _amount) public {
-    emit FunctionEntered(1);
     if(balances[msg.sender] >= _amount) {
       (bool result,) = msg.sender.call{value:_amount}("");
       if(result) {

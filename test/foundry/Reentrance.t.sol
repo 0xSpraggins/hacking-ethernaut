@@ -15,7 +15,7 @@ contract ReentranceTest is Test {
 
     function setUp() public {
         _reentrance = new Reentrance();
-        _hackReentrance = new HackReentrance(address(_reentrance));
+        _hackReentrance = new HackReentrance(payable(address((_reentrance))));
 
         (_hacker, ) = makeAddrAndKey("hacker");
         (_rando, ) = makeAddrAndKey("rando");
@@ -47,7 +47,7 @@ contract ReentranceTest is Test {
         // );
 
         (bool success,) = address(_hackReentrance).call{value: 200000000}(
-            abi.encodeWithSignature("contribute")
+            abi.encodeWithSignature("contribute()")
         );
 
         uint256 reentranceBalance = address(_reentrance).balance;
