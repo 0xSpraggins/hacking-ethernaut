@@ -91,7 +91,7 @@ Problem: Gain ownership of the contract
 Vulnerability: The contracts constructor has a typo in it and is `Fal1out` instead of `Fallout` this allows any user to call it instead of
     it being called upon contract deployment. In order to gain ownership all a user has to do is call `await contract.Fal1out();`.
 
-### Level 3: Coin Flip \*Current Issue in Script
+### Level 3: Coin Flip
 
 Problem: The base smart contract tracks the number of consecutive wins a user has when guessing a coin flip. The goal in this level is to predict the outcome 10 times in a row.
 
@@ -160,3 +160,10 @@ Vulnerability: Because this game involves sending Eth to the previous kings addr
 Problem: Steal all the funds from the contract
 
 Vulnerability: In the `withdraw` function the balances are updated after Eth is sent to `msg.sender` because of this an attacker can utilize a fallback function to reenter the withdraw contracts before balances are updated thus drain the entire contract.
+
+
+### Level 11: Elevator
+
+Problem: Reach the top floor of the building
+
+Vulnerability: 

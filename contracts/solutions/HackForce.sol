@@ -1,13 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../ethernaut/Force.sol";
+/**
+ * @notice Inteface relating to the Force contract found in Ethernaut Level 7
+ * @notice Full contract can be found in the ethernaut directory of this repo 
+ */
+interface IForce {
+    // Empty interface
+}
 
 contract HackForce {
-    Force private immutable _force;
+    IForce private immutable _force;
 
     constructor(address forceAddress) {
-        _force = Force(forceAddress);
+        _force = IForce(forceAddress);
     }
 
     function donate() public payable {

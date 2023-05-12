@@ -1,14 +1,24 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.12;
 
-import "../ethernaut/Reentrance.sol";
+/**
+ * @notice Inteface relating to the Reentrance contract found in Ethernaut Level 10
+ * @notice Full contract can be found in the ethernaut directory of this repo 
+ */
+interface IReentrance {
+    function donate(address _to) external payable;
+
+    function balanceOf(address _who) external view returns (uint balance);
+
+    function withdraw(uint _amount) external;
+}
 
 contract HackReentrance {
 
-    Reentrance private _reentrance;
+    IReentrance private _reentrance;
     
     constructor(address payable reentranceAddress) public {
-        _reentrance = Reentrance(reentranceAddress);
+        _reentrance = IReentrance(reentranceAddress);
     }
 
     function contribute() external payable {
