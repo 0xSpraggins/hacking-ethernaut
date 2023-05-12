@@ -13,15 +13,22 @@ contract KingTest is Test {
     address private _rando;
 
     function setUp() public {
-        _king = new King();
-        _hackKing = new HackKing(payable(address(_king)));
+        (address ethernaut, ) = makeAddrAndKey("ethernaut");
 
+        vm.startPrank(ethernaut);
+        _king = new King();
+        vm.stopPrank();
+    
         (_hacker, ) = makeAddrAndKey("hacker");
         (_rando, ) = makeAddrAndKey("rando"); 
 
-        vm.startPrank(_hacker);
+        vm.deal(_hacker, 1 ether);
+        vm.deal(_rando, 1 ether);
 
-        (bool success, ) = address(_hackKing).call{value: _king.prize() + 1}(
+        vm.startPrank(_hacker);
+        _hackKing = new HackKing(payable(address(_king)));
+
+        (bool success, ) = address(_hackKing).call{ value: _king.prize() + 1 }(
             abi.encodeWithSignature("becomeKing()")
         );
 
@@ -30,7 +37,7 @@ contract KingTest is Test {
         vm.stopPrank();
     }
 
-    function test_RevertWhenRandoTriesToDethrown() public {
+    function testFail_RevertWhenRandoTriesToDethrown() public {
         vm.startPrank(_rando);
 
         payable(_king).transfer(_king.prize() + 1);
