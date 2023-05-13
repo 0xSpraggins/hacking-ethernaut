@@ -39,6 +39,9 @@ Ethernaut is a game created by Open Zeppelin to practice hacking solidity smart 
    yarn hardhat run <path to script> --network goerli
 
    // Scripts using foundry
+   // step 1: import .env variables
+   source .env
+   // step 2: Run the script
    forge script <path to script>:<script contract name> --rpc-url $<name of url .env variable> --broadcast -vvvv
    ```
 
@@ -166,4 +169,4 @@ Vulnerability: In the `withdraw` function the balances are updated after Eth is 
 
 Problem: Reach the top floor of the building
 
-Vulnerability: 
+Vulnerability: Because the `isLastFloor` from the `Building` interface contains a function with just and external type it allows a hacker to create a contract that uses the function to change state. This is problematic because a user can create a smart contract that calls manipulates state variables to get the `Elevator` contract to sent the elevator to the top floor, which its not suppose to do. In this repo, the `HackElevator` contract is a `Building` which has a `isLastFloor` function that behaves in different manner depending on how many times it has been called and what floor is being called. This can be used to reach the top floor of the building.

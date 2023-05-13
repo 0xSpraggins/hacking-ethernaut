@@ -17,6 +17,8 @@ contract ReentranceScript is Script {
             abi.encodeWithSignature("contribute()")
         );
 
+        require(success, "ReentranceScript: failed to contribute to hackReentrance");
+
         hackReentrance.beginAttack();
 
         vm.stopBroadcast();
