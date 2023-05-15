@@ -170,3 +170,15 @@ Vulnerability: In the `withdraw` function the balances are updated after Eth is 
 Problem: Reach the top floor of the building
 
 Vulnerability: Because the `isLastFloor` from the `Building` interface contains a function with just and external type it allows a hacker to create a contract that uses the function to change state. This is problematic because a user can create a smart contract that calls manipulates state variables to get the `Elevator` contract to sent the elevator to the top floor, which its not suppose to do. In this repo, the `HackElevator` contract is a `Building` which has a `isLastFloor` function that behaves in different manner depending on how many times it has been called and what floor is being called. This can be used to reach the top floor of the building.
+
+### Level 12: Privacy 
+
+Problem: Unlock the contract
+
+Vulnerability: Just
+
+```js
+const password = await web3.eth.getStorageAt(contract.address, 5);
+const key = data2.slice(0,34);
+await contract.unlock(password);
+```
