@@ -175,10 +175,10 @@ Vulnerability: Because the `isLastFloor` from the `Building` interface contains 
 
 Problem: Unlock the contract
 
-Vulnerability: Just
+Vulnerability: Just like in Level 8 the vulnerability lies in the fact that the key to `unlock` the contract is a private state variable. Because of the different size of the data types that make up the state variables, finding the storage slot isnt as easy as just counting the order of the variables. Instead we must map them out ourself. Once we do that we see that `data[2]` fills up the entire storage slot at index 5. Once we get all the data from storage slot 5 we then need to slice the first 16 bytes of the data due to `_key = bytes16(data[2])`. Once we have this we simply pass the result into the `unlock` function to solve the level.
 
 ```js
-const password = await web3.eth.getStorageAt(contract.address, 5);
+const data2 = await web3.eth.getStorageAt(contract.address, 5);
 const key = data2.slice(0,34);
-await contract.unlock(password);
+await contract.unlock(key);
 ```
