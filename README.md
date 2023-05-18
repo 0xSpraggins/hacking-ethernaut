@@ -182,3 +182,18 @@ const data2 = await web3.eth.getStorageAt(contract.address, 5);
 const key = data2.slice(0,34);
 await contract.unlock(key);
 ```
+
+Level 13: GatekeeperOne
+
+Problem: Get through all the gates and set the `entrant` state variable to your EOA.
+
+Vulnerability: This contract relies on three modifiers to safe guard the enter function. Each of these functions can be manipulated in a way to easily bypass the require statements. The first gate checks if `tx.orign != msg.sender`. This can be passed by creating a smart contract to act like a middle man between calls. The next gate can be passed easily by calculating how much gas is spent on the first gate check and then adding that to a multiple of `8191` to use for the amount of gas you send along with the `enter` call. The final gate allows anyone to pass through due to key relying on the `tx.origin`. By using bit masking and the & bitwise operator a hacker can easily manipulate their address into a valid key. 
+
+*** Important ***
+The current testing configuration uses the standard compile settings in Foundry. If you want to run the script to execute an attack on chain please check the `HackGatekeeperOne` contract. If the compiler settings for your contract are `v0.8.12+commit.f00d7308` with `1000` optimization runs, add this within the `foundry.toml`.
+
+```
+optimizer_runs = 1000
+solc_version = '0.8.12'
+```
+

