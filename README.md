@@ -183,7 +183,7 @@ const key = data2.slice(0,34);
 await contract.unlock(key);
 ```
 
-Level 13: GatekeeperOne
+### Level 13: GatekeeperOne
 
 Problem: Get through all the gates and set the `entrant` state variable to your EOA.
 
@@ -196,4 +196,5 @@ The current testing configuration uses the standard compile settings in Foundry.
 optimizer_runs = 1000
 solc_version = '0.8.12'
 ```
+
 
