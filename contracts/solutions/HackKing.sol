@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 /**
- * @notice Inteface relating to the King contract found in Ethernaut Level 9
+ * @notice Interface relating to the King contract found in Ethernaut Level 9
  * @notice Full contract can be found in the ethernaut directory of this repo
  */
 interface IKing {
