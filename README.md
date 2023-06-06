@@ -203,4 +203,8 @@ Problem: Get through all the gates and set the `entrant` state variable to your 
 
 Vulnerability: This problem is very similar to the last level as all gates can be passed through various means of manipulation. `gateOne` is identical to the last levels first gate. `gateTwo` checks the that the bytecode size for `msg.sender` is not 0. This is to stop contracts from attacking the contract and only allow EOAs to pass through. There is a loop-hole through this however as contracts do not have source code available during construction, so this gate can be passed easily if `enter` is called within the constructor. For `gateThree` one can use the bitwise operator `^` on the exploit contracts address to create a valid `_gateKey`. The inverse of a XOR problem is just the XOR of the two known inputs. Since we need to find the `_gateKey` we can just XOR the casted address of the exploit contract with the max of a uint64. This will give us the `_gateKey` we need to pass the final gate.
 
+Level 15: NaughtCoin
 
+Problem: You own all the NaughtCoin Tokens but they are locked for 10 years before they can be transfered. The goal is to transfer all the tokens and get your balance to 0.
+
+Vulnerability: 
