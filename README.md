@@ -207,4 +207,4 @@ Level 15: NaughtCoin
 
 Problem: You own all the NaughtCoin Tokens but they are locked for 10 years before they can be transfered. The goal is to transfer all the tokens and get your balance to 0.
 
-Vulnerability: 
+Vulnerability: The `timeLock` only plays a factor when then the caller of `transfer` is the `player`. An easy way around this is to create an exploit contract that calls `transfer` so that it takes the place of `msg.sender` instead of the `player`. All the user will need to do is `approve` the exploit contract to spend the full available balance and the exploit contract will be able to transfer all the tokens without having to wait 10 years.
