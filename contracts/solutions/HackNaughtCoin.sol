@@ -14,7 +14,8 @@ contract HackNaughtCoin {
         _naughtCoin = INaughtCoin(naughtCoin);
     }
 
-    // Level instance player has the token balance. Calling transfer from an external 
+    // Level instance player has the token balance. Calling transfer from an external
+    // Caller must approve this contract prior to attack
     function attack(address to) external {
         address spender = msg.sender;
         uint256 amount = _naughtCoin.balanceOf(spender);
