@@ -42,7 +42,7 @@ Ethernaut is a game created by Open Zeppelin to practice hacking solidity smart 
    // step 1: import .env variables
    source .env
    // step 2: Run the script
-   forge script scripts/foundry/<file name>::<script contract name> --rpc-url $<name of url .env variable> --broadcast -vvvv
+   forge script scripts/foundry/<file name>:<script contract name> --rpc-url $<name of url .env variable> --broadcast -vvvv
    ```
 
 ## Levels
@@ -215,3 +215,8 @@ Problem: Claim ownership of the contract.
 
 Vulnerability: From previous knowledge of `delegatecall` and state variable storage, this contract can be hacked using an exploit contract that has the same state variable structure as the `Preservation` contract. Because `delegatecall` is being used to call `LibraryContract` and `LibraryContract`s state variable layout does not match `Preservation` a hacker can easy call `setFirstTime` with the address of the exploit contract which would then set the first `timeZone1Library` to the address of the exploit contract. Now all the hacker needs to do is have a function with the same time signature `setTime(uint256)` in the exploit contract and have the function logic set storage slot 2 to the desired `owner` address. Now the next time the exploit contract calls `setFirstTime` it can pass the desired `owner` address and through `delegatecall` the `Preservation` contract will set the `owner` to the desired address.
 
+Level 17: Recovery
+
+Problem: A token creation lost 0.001 ether. Recover the funds.
+
+Vulnerability: Smart contracts are deployed on chain using the `CREATE` opcode. The address of deployed contracts is calculated using the deployers address and their account nonce. This allows us to find the lost token address easily. Once the address is found, the lost funds must be recovered. In `SimpleToken`  the `destroy` function utilizes `selfDestruct` which when called destroys the contract and travels all tokens to a desired address. `destroy` is not protected so any user can call it and pass an address to steal the funds. Knowing both of these points allows a hacker to compute the lost contract address and collect or burn all tokens within the contract. 
