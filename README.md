@@ -231,4 +231,13 @@ Level 19: AlienCodex
 
 Problem: Claim ownership of the contract.
 
-Vulnerability:
+Vulnerability: The vulnerability lies within `retract` where the length of the array is reduced by one without any overflow check. This is an outdates vulnerability as solidity version 0.8.0 fixes this with automatic overflow checks. Placing the array length to 0 allows a hacker to utilze the `revise` function and inject their own address in the form of bytecode to storage slot 0, which holds `owner`. The calculation of the storage slot can simply be calculate using the function below:
+
+```solidity
+// Find the max possible storage slot for an array that starts at storage slot 1 and then add 1 to overflow to index 0
+uint256 index = (2**256 - 1) - uint(keccak256(abi.encode(1))) + 1;
+```
+
+::: warning 
+Because this contract utilizes solidity ^0.5.0, Foundry testing is not supported. Remix IDE was used for testing and deploying the exploit contract.
+::: 
