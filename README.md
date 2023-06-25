@@ -220,3 +220,9 @@ Level 17: Recovery
 Problem: A token creation lost 0.001 ether. Recover the funds.
 
 Vulnerability: Smart contracts are deployed on chain using the `CREATE` opcode. The address of deployed contracts is calculated using the deployers address and their account nonce. This allows us to find the lost token address easily. Once the address is found, the lost funds must be recovered. In `SimpleToken`  the `destroy` function utilizes `selfDestruct` which when called destroys the contract and travels all tokens to a desired address. `destroy` is not protected so any user can call it and pass an address to steal the funds. Knowing both of these points allows a hacker to compute the lost contract address and collect or burn all tokens within the contract. 
+
+Level 18: MagicNumber
+
+Problem: Provide Ethernaut with a `Solver` that will respond the `whatIsTheMeaningOfLife()` with the number 42. Needs to be 10 opcodes or less.
+
+Vulnerability: This contract requires a hacker to deploy raw EVM bytecode using assembly that contains runtime code returning the value 42. Detailed instructions on how to create this bytecode step by step can be found in `HackMagicNum`.
