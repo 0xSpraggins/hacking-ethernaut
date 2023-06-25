@@ -226,3 +226,9 @@ Level 18: MagicNumber
 Problem: Provide Ethernaut with a `Solver` that will respond the `whatIsTheMeaningOfLife()` with the number 42. Needs to be 10 opcodes or less.
 
 Vulnerability: This contract requires a hacker to deploy raw EVM bytecode using assembly that contains runtime code returning the value 42. Detailed instructions on how to create this bytecode step by step can be found in `HackMagicNum`.
+
+Level 19: AlienCodex
+
+Problem: Claim ownership of the contract.
+
+Vulnerability:
